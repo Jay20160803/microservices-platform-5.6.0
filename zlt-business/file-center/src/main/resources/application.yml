@@ -23,6 +23,7 @@ zlt:
       accessKeySecret: ${zlt.s3.accessKeySecret}
       endpoint: ${zlt.s3.endpoint}
       bucketName: ${zlt.s3.bucketName}
+      pathStyleAccessEnabled: false
   swagger:
     enabled: true
     title: 文件中心

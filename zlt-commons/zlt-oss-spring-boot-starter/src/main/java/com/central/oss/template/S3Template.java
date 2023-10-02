@@ -98,8 +98,13 @@ public class S3Template implements InitializingBean {
         amazonS3.putObject(putObjectRequest);
 
         ObjectInfo obj = new ObjectInfo();
-        obj.setObjectPath(bucketName + PATH_SPLIT + objectName);
-        obj.setObjectUrl(fileProperties.getS3().getEndpoint() + PATH_SPLIT + obj.getObjectPath());
+        //obj.setObjectPath(bucketName + PATH_SPLIT + objectName);
+        //obj.setObjectUrl(fileProperties.getS3().getEndpoint() + PATH_SPLIT + obj.getObjectPath());
+        obj.setObjectPath(objectName);
+        String endpoint = fileProperties.getS3().getEndpoint().startsWith("http") ?
+                fileProperties.getS3().getEndpoint().substring(8,fileProperties.getS3().getEndpoint().length())
+                : fileProperties.getS3().getEndpoint();
+        obj.setObjectUrl("https://" + bucketName + "." + endpoint + PATH_SPLIT + objectName);
         return obj;
     }
 
